@@ -5,18 +5,26 @@ const randomizer = (items) => (
   Math.floor(Math.random() * items.length)
 )
   
-
 const Button = ({text, handleClick}) => (
   <button onClick={handleClick}>{text}</button>
 )
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Array(props.anecdotes.length).fill(0))
+
+  const handleVote = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
+  }
 
   return (
     <div>
       <p>{props.anecdotes[selected]}</p>
+      <p>has { votes[selected] } votes</p>
       <Button text="next anecdote" handleClick={() => setSelected(randomizer(props.anecdotes))}/>
+      <button onClick={handleVote}>vote</button>
     </div>
   )
 }
