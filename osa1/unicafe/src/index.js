@@ -11,7 +11,7 @@ const Statistics = (props) => {
         <div>bad {props.bad}</div>
         <div>all {sum}</div>
         <div>average {(props.good*1 + props.neutral*0 + props.bad*(-1))/sum}</div>
-        <div>positive {props.good/sum}</div>
+        <div>positive {props.good/sum*100} %</div>
       </div>
     )
   } else {
