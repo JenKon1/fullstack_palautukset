@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Calc = (props) => {
+const Statistics = (props) => {
   const sum = props.good + props.bad + props.neutral
   return (
     <div>
-      <p>all {sum}</p>
-      <p>average {(props.good*1 + props.neutral*0 + props.bad*(-1))/sum}</p>
-      <p>positive {props.good/sum}</p>
+      <h1>Statistics</h1>
+      <div>good {props.good}</div>
+      <div>neutral {props.neutral}</div>
+      <div>bad {props.bad}</div>
+      <div>all {sum}</div>
+      <div>average {(props.good*1 + props.neutral*0 + props.bad*(-1))/sum}</div>
+      <div>positive {props.good/sum}</div>
     </div>
   )
 }
@@ -33,11 +37,8 @@ const App = () => {
       <button onClick={() => setBad(bad + 1)}>
         bad
       </button>
-      <h1>Statistics</h1>
-      <div> good {good} </div>
-      <div> neutral {neutral} </div>
-      <div> bad {bad} </div>
-      <Calc good={good} bad={bad} neutral={neutral}/>
+      
+      <Statistics good={good} bad={bad} neutral={neutral}/>
     </div>
   )
 }
