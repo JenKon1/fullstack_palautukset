@@ -6,7 +6,12 @@ const Button = ({text, handleClick}) => (
 )
 
 const StatisticLine = ({text, value}) => (
-  <div>{text} {value}</div>
+  <tr>
+    <td> {text} </td>
+    <td> {value} </td>
+  </tr>
+  
+  
 )
 
 const Statistics = (props) => {
