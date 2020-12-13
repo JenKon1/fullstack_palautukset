@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom'
 
 const Statistics = (props) => {
   const sum = props.good + props.bad + props.neutral
-  return (
-    <div>
-      <h1>Statistics</h1>
-      <div>good {props.good}</div>
-      <div>neutral {props.neutral}</div>
-      <div>bad {props.bad}</div>
-      <div>all {sum}</div>
-      <div>average {(props.good*1 + props.neutral*0 + props.bad*(-1))/sum}</div>
-      <div>positive {props.good/sum}</div>
-    </div>
-  )
+  if(props.good>0 || props.neutral>0 || props.bad>0){
+    return (
+      <div>
+        <div>good {props.good}</div>
+        <div>neutral {props.neutral}</div>
+        <div>bad {props.bad}</div>
+        <div>all {sum}</div>
+        <div>average {(props.good*1 + props.neutral*0 + props.bad*(-1))/sum}</div>
+        <div>positive {props.good/sum}</div>
+      </div>
+    )
+  } else {
+    return <p>No feedback given</p>
+  }
+  
 }
 
 
@@ -37,7 +41,7 @@ const App = () => {
       <button onClick={() => setBad(bad + 1)}>
         bad
       </button>
-      
+      <h1>Statistics</h1>
       <Statistics good={good} bad={bad} neutral={neutral}/>
     </div>
   )
