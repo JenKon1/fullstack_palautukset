@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
 import Person from './components/Person'
 
+const nameAlreadyExists = (persons, name) => {
+  return persons.map(p=>p.name).includes(name)
+}
+
 const App = (props) => {
   const [persons, setPersons] = useState(props.names)
   const [newName, setNewName] = useState('') 
 
   const addName = (event) => {
     event.preventDefault()
-    const nameObject = {
-      name: newName,
+
+    if(nameAlreadyExists(persons, newName)){
+      alert(`${newName} is already added to phonebook`)
+    } else {
+      const nameObject = {
+        name: newName,
+      }
+    
+      setPersons(persons.concat(nameObject))
+      setNewName('')
     }
-  
-    setPersons(persons.concat(nameObject))
-    setNewName('')
   }
 
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
+  const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
 
@@ -26,7 +34,7 @@ const App = (props) => {
       <form onSubmit={addName}>
         <input
           value={newName}
-          onChange={handleNoteChange}
+          onChange={handleNameChange}
         />
         <button type="submit">add</button>
       </form>
