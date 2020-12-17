@@ -6,21 +6,24 @@ const nameAlreadyExists = (persons, name) => {
 }
 
 const App = (props) => {
-  const [persons, setPersons] = useState(props.names)
-  const [newName, setNewName] = useState('') 
+  const [persons, setPersons] = useState(props.persons)
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
-  const addName = (event) => {
+  const addContact = (event) => {
     event.preventDefault()
 
     if(nameAlreadyExists(persons, newName)){
       alert(`${newName} is already added to phonebook`)
     } else {
-      const nameObject = {
+      const contactObject = {
         name: newName,
+        number: newNumber
       }
     
-      setPersons(persons.concat(nameObject))
+      setPersons(persons.concat(contactObject))
       setNewName('')
+      setNewNumber('')
     }
   }
 
@@ -28,14 +31,22 @@ const App = (props) => {
     setNewName(event.target.value)
   }
 
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
+
   return (
     <div>
       <h1>phonebook</h1>
-      <form onSubmit={addName}>
-        <input
+      <form onSubmit={addContact}>
+        name: <input
           value={newName}
           onChange={handleNameChange}
         />
+        <div> number: <input
+          value={newNumber}
+          onChange={handleNumberChange}
+        /> </div>
         <button type="submit">add</button>
       </form>
       <h1>Numbers</h1>
