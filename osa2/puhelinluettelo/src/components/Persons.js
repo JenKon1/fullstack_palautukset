@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Person = ({ person }) => {
+const Person = ({ person, deletion }) => {
     return (
-      <li>{person.name + " " + person.number}</li>
+      <li>{person.name + " " + person.number} <button onClick={() => deletion(person)}>delete</button></li>
     )
   }
 
-const Persons = ({persons, filter}) => {
+const Persons = ({persons, filter, deletion}) => {
     const caseinsensitiveFilter = (person) => (
       person.name.toUpperCase().includes(
         filter.toUpperCase()
@@ -16,7 +16,7 @@ const Persons = ({persons, filter}) => {
       <ul>
         {persons
           .filter(caseinsensitiveFilter)
-          .map(person => <Person key={person.name} person={person} />)}
+          .map(person => <Person key={person.name} person={person} deletion={deletion} />)}
       </ul>
     )
   }

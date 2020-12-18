@@ -43,6 +43,15 @@ const App = () => {
     }
   }
 
+  const deleteContact = deletedContact => {
+    if(window.confirm(` Delete ${deletedContact.name}?`)) {
+      personService
+        .deleteThis(deletedContact.id)
+        .then(setPersons(persons.filter(person => person.id !== deletedContact.id)))
+    }
+
+  }
+
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -55,6 +64,7 @@ const App = () => {
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
   }
+
 
   return (
     <div>
@@ -70,7 +80,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <h1>Numbers</h1>
-      <Persons persons={persons} filter={filter}/>
+      <Persons persons={persons} filter={filter} deletion={deleteContact}/>
     </div>
   )
 }
