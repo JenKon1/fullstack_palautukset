@@ -29,6 +29,26 @@
       "name": "Matti Teppo",
       "number": "050123123",
       "id": 6
+    },
+    {
+      "name": "Aino Kaisa",
+      "number": "020123123",
+      "id": 7
+    },
+    {
+      "name": "Antti Matti",
+      "number": "020123",
+      "id": 8
+    },
+    {
+      "name": "Jukka Pekka",
+      "number": "111222333",
+      "id": 10
+    },
+    {
+      "name": "Jukka Tepponen",
+      "number": "020555666",
+      "id": 12
     }
   ]
 }

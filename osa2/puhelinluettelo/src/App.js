@@ -3,6 +3,7 @@ import personService from './services/persons'
 import Persons from './components/Persons'
 import ContactForm from './components/ContactForm'
 import Filter from './components/Filter'
+import Notification from './components/Notifications'
 
 const nameAlreadyExists = (persons, name) => {
   return persons.map(p=>p.name).includes(name)
@@ -13,6 +14,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [Message, setMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -37,6 +39,12 @@ const App = () => {
       .create(contactObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setMessage(
+          `${newName} was added`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000)
         setNewName('')
         setNewNumber('')
       })
@@ -48,6 +56,12 @@ const App = () => {
       personService
         .deleteThis(deletedContact.id)
         .then(setPersons(persons.filter(person => person.id !== deletedContact.id)))
+        setMessage(
+          `${deletedContact.name} was deleted`
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000)
     }
 
   }
@@ -68,6 +82,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={Message} />
       <h1>Phonebook</h1>
       <Filter filter={filter} onFilterChange={handleFilterChange}/>
       
