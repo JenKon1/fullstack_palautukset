@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Kiva päivä",
-    "author": "Matti Pekka",
+    "title": "Mahtava päivä",
+    "author": "Luukas Pekka",
     "url": "www.Matti-pekka.fi",
     "likes": 30
 }
