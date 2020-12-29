@@ -67,16 +67,23 @@ const App = () => {
     setUser(null)
   }
 
+  const handleDelete = async (blog) => {
+
+    if (window.confirm(`Removing blog ${blog.title} by ${blog.author}`)) {
+      await blogService.remove(blog)
+      const updatedBlogs = blogs.filter(b => b.id !== blog.id)
+      setBlogs(updatedBlogs)
+    }
+  }
+
   const loginForm = () => (
-    <Togglable buttonLabel='login'>
-      <LoginForm
-        username={username}
-        password={password}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handlePasswordChange={({ target }) => setPassword(target.value)}
-        handleSubmit={handleLogin}
-      />
-    </Togglable>
+    <LoginForm
+      username={username}
+      password={password}
+      handleUsernameChange={({ target }) => setUsername(target.value)}
+      handlePasswordChange={({ target }) => setPassword(target.value)}
+      handleSubmit={handleLogin}
+    />
   )
 
   const blogForm = () => (
@@ -99,7 +106,7 @@ const App = () => {
       }
 
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} onDeleted={handleDelete}/>
       )}
     </div>
   )
