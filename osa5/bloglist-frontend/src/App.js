@@ -6,6 +6,7 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
+import { Table } from 'react-bootstrap'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -93,21 +94,23 @@ const App = () => {
   )
 
   return (
-    <div>
-      <h2>blogs</h2>
+    <div className="container">
+      <h2>BLOGS</h2>
       <Notification message={errorMessage} />
 
       {user === null ?
         loginForm() :
         <div>
-          <p>{user.name} logged in <button onClick={handleLogout} type="logout">logout</button></p>
+          <em>{user.name} logged in <button className="btn btn-outline-warning" onClick={handleLogout} type="logout">logout</button></em>
           {blogForm()}
         </div>
       }
+      <Table striped>
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} onDeleted={handleDelete}/>
+        )}
+      </Table>
 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} onDeleted={handleDelete}/>
-      )}
     </div>
   )
 }
